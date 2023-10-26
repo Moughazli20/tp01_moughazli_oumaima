@@ -2,68 +2,106 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de Compte Client</title>
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet/less" type="text/css" href="styles.less">
     <script src="less.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Lier jQuery à la page HTML
+            // Écrivez votre fonction de validation ici
+            $("#clientForm").submit(function(event) {
+                // Empêcher la soumission du formulaire par défaut
+                event.preventDefault();
+
+                // Récupérer les valeurs des champs
+                var password = $("#password").val();
+                var confirmPassword = $("#confirmPassword").val();
+
+                // Valider le mot de passe
+                if (password !== confirmPassword) {
+                    $("#errorMessages").text("Les mots de passe ne correspondent pas.");
+                    $("#errorMessages").show();
+                } else {
+                    // Soumettre le formulaire si tout est valide
+                    this.submit();
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
         <h1>Formulaire de Compte Client</h1>
     </header>
 
-    <div class="container">
-        <form>
-            <div class="form-group">
-                <label for="nom">Nom :</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
-            </div>
-            <div class="form-group">
-                <label for="prenom">Prénom :</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" required>
-            </div>
-            <div class="form-group">
-                <label for="adresse">Adresse :</label>
-                <input type="text" class="form-control" id="adresse" name="adresse">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="cp">Code Postal :</label>
-                    <input type="text" class="form-control" id="cp" name="cp">
-                </div>
-                <div class="form-group col-md-8">
-                    <label for="ville">Ville :</label>
-                    <input type="text" class="form-control" id="ville" name="ville">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="tel">Téléphone :</label>
-                <input type="tel" class="form-control" id="tel" name="tel">
-            </div>
-            <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="civ">Civilité :</label>
-                <select class="form-control" id="civ" name="civ">
-                    <option value="M">Monsieur</option>
-                    <option value="Mme">Madame</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="password">Mot de passe :</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="login">Login :</label>
-                <input type="text" class="form-control" id="login" name="login" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Soumettre</button>
-        </form>
-    </div>
+    <form id="clientForm" action="#" method="post">
+        <div class="form-group">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
 
-    <script src="bootstrap.min.js"></script>
+        <div class="form-group">
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+        </div>
+
+        <div class="form-group">
+            <label for="adresse">Adresse :</label>
+            <input type="text" id="adresse" name="adresse" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cp">Code postal :</label>
+            <input type="text" id="cp" name="cp" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ville">Ville :</label>
+            <input type="text" id="ville" name="ville" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tel">Téléphone :</label>
+            <input type="tel" id="tel" name="tel" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="civilite">Civilité :</label>
+            <select id="civilite" name="civilite" required>
+                <option value="M.">M.</option>
+                <option value="Mme">Mme</option>
+                <option value="Autre">Autre</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirmation du mot de passe :</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+
+        <div class="form-group">
+            <label for="login">Login :</label>
+            <input type="text" id="login" name="login" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">Valider</button>
+        </div>
+    </form>
+
+    <div id="errorMessages" class="alert alert-danger" style="display: none;"></div>
 </body>
 </html>
